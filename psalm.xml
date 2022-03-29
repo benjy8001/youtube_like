@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="4"
+    resolveFromConfigFile="true"
+    totallyTyped="true"
+    strictBinaryOperands="true"
+    allowPhpStormGenerics="true"
+    allowStringToStandInForClass="false"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="src" />
+        <ignoreFiles>
+            <directory name="vendor" />
+            <directory name="src/*/*Tests*/" />
+            <directory name="src/*/*/*Tests*/" />
+            <directory name="src/*Bundle/Tests" />
+            <directory name="src/*/*Bundle/Tests" />
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+        <!-- Start Dead Code Config -->
+        <UnusedMethod>
+            <errorLevel type="suppress">
+                <directory name="src/*/Controller" />
+                <directory name="src/*/Command" />
+                <directory name="src/*/EventListener" />
+                <referencedMethod name="*::__construct"/>
+            </errorLevel>
+        </UnusedMethod>
+
+        <UnusedClass errorLevel="suppress">
+            <errorLevel type="error">
+                <directory name="src/*/Entity" />
+                <directory name="src/*/Exception" />
+            </errorLevel>
+        </UnusedClass>
+        <PossiblyUnusedMethod>
+            <errorLevel type="suppress">
+                <directory name="src/*/Entity" />
+                <directory name="src/*/Controller" />
+                <directory name="src/*/Command" />
+                <directory name="src/*/EventListener" />
+                <!-- <directory name="src/*/Twig" />-->
+                <!-- Tests have lots of unused publics - all the test methods-->
+                <directory name="src/*/*Tests*/" />
+                <referencedMethod name="*::__construct"/>
+            </errorLevel>
+        </PossiblyUnusedMethod>
+        <!-- End Dead Code Config-->
+    </issueHandlers>
+</psalm>

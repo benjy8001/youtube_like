@@ -1,0 +1,25 @@
+name: Quality checker
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  quality_checker:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+    - name: Run linter
+      run: make lint
+    - name: Run security checker
+      run: make security
+    - name: Run cs fixer
+      run: make php-cs-fixer
+    - name: Run phpunit
+      run: make phpunit

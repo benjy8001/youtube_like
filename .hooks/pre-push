@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# execute a command hidden if fail ask if re rerun command with output
+#
+# sample : run_command make test
+#
+function run_command {
+    LAST_CMD=$@
+    printf "\033[36m running :  \033[34m $LAST_CMD \033[0m"
+    $($LAST_CMD >> /dev/null 2>&1)
+    rc=$?
+    if [[ $rc != 0 ]] ; then
+        printf "\033[31m .. Fail  \033[0m\n"
+        echo -n "Bouh Looser ! "
+        exit $rc;
+    else
+       printf "\033[32m .. PASS  \033[0m\n"
+    fi
+}
+
+exec < /dev/tty
+make banner
+run_command make security
+run_command make db-validate-schema
+run_command make lp
+run_command make ly
+run_command make composer-validate
+run_command make phpunit
+
+exit 0

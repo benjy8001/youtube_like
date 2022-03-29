@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+GIT_DIR=${GIT_DIR-`git rev-parse --git-dir`}
+. "$GIT_DIR/hooks/change_detector.sh"
+
+if [ -f composer.lock ]
+then
+	if has_changed post-checkout composer.lock
+	then
+		echo "composer.lock has changed!"
+	    make composer-install
+	fi
+else
+	echo "no composer.lock found!"
+fi
