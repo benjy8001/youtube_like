@@ -13,6 +13,14 @@ class Channel extends Model
     protected $guarded = [];
 
     /**
+     * @return string
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
+    /**
      * @return BelongsTo
      */
     public function user(): BelongsTo

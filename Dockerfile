@@ -4,6 +4,7 @@ RUN apt-get install -y $PHPIZE_DEPS && \
     pecl install xdebug && \
     docker-php-ext-enable xdebug && \
     docker-php-ext-install mysqli pdo pdo_mysql  && \
+    a2enmod rewrite && \
     apt-get remove -y $PHPIZE_DEPS
 
 RUN set -eux; \
