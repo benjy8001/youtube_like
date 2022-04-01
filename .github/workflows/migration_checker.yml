@@ -8,7 +8,7 @@ on:
 
 jobs:
 
-  quality_checker:
+  migration_checker:
 
     runs-on: ubuntu-latest
 
@@ -16,4 +16,4 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v2
     - name: Run migration checker
-      run: make start && make migrate
+      run: docker network create nginx-proxy && make start && make migrate

@@ -215,6 +215,9 @@ phpmetrics: artefacts  ## PhpMetrics (http://www.phpmetrics.org)
 php-cs-fixer: ## php-cs-fixer (http://cs.sensiolabs.org)
 	$(QA) php-cs-fixer fix --dry-run --using-cache=no --verbose --diff
 
+apply-php-cs-fixer-all: ## php-cs-fixer (http://cs.sensiolabs.org)
+	$(QA) php-cs-fixer fix --using-cache=no --verbose --diff
+
 apply-php-cs-fixer: ## apply php-cs-fixer fixes on new files
 	$(eval NEW_FILES := $(shell git diff $(REF_BRANCH) --name-only| egrep '.php$$'))
 	$(QA) sh -c 'for filename in $(NEW_FILES);  do if [ -f $$filename ]; then  echo  "fixing $$filename";  php-cs-fixer fix -q --using-cache=no $$filename; fi; done;'
