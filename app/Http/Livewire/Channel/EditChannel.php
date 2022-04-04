@@ -3,13 +3,15 @@
 namespace App\Http\Livewire\Channel;
 
 use App\Models\Channel;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
 use Livewire\Component;
 
 class EditChannel extends Component
 {
+    use AuthorizesRequests;
+
     /** @var Channel */
     public $channel;
 
@@ -46,6 +48,7 @@ class EditChannel extends Component
      */
     public function update(): Redirector
     {
+        $this->authorize('update', $this->channel);
         $this->validate();
         $this->channel->update([
             'name' => $this->channel->name,

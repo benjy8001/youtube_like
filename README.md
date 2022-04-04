@@ -7,6 +7,7 @@ npm run --cache .npm/cache dev
 composer require livewire/livewire
 artisan livewire:publish --config
 artisan make:livewire Channel\\EditChannel
+artisan make:policy ChannelPolicy
 
 > ci migrate validate
 
