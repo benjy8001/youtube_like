@@ -8,6 +8,9 @@ composer require livewire/livewire
 artisan livewire:publish --config
 artisan make:livewire Channel\\EditChannel
 artisan make:policy ChannelPolicy
+composer require intervention/image
+artisan vendor:publish --provider="Intervention\Image\ImageServiceProviderLaravelRecent"
+artisan storage:link
 
 > ci migrate validate
 

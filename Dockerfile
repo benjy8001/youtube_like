@@ -3,7 +3,7 @@ FROM php:8.0-apache
 RUN apt-get install -y $PHPIZE_DEPS && \
     pecl install xdebug && \
     docker-php-ext-enable xdebug && \
-    docker-php-ext-install mysqli pdo pdo_mysql  && \
+    docker-php-ext-install mysqli pdo pdo_mysql gd && \
     a2enmod rewrite && \
     apt-get remove -y $PHPIZE_DEPS
 

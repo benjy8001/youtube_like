@@ -1,5 +1,7 @@
 <div>
-    {{ $channel->name }}
+    @if ($channel->name)
+        <img src="{{ secure_asset('images/' . $channel->image) }}">
+    @endif
 
     <form wire:submit.prevent="update">
         <div class="row mb-3">
