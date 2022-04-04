@@ -7,13 +7,19 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\TemporaryUploadedFile;
+use Livewire\WithFileUploads;
 
 class EditChannel extends Component
 {
     use AuthorizesRequests;
+    use WithFileUploads;
 
     /** @var Channel */
     public $channel;
+
+    /** @var TemporaryUploadedFile */
+    public $image;
 
     /**
      * @return string[]
@@ -24,6 +30,7 @@ class EditChannel extends Component
             'channel.name' => 'required|max:255|unique:channels,name,' . $this->channel->id,
             'channel.slug' => 'required|max:255|unique:channels,slug,' . $this->channel->id,
             'channel.description' => 'nullable|max:1024',
+            'image' => 'nullable|image|max:1024',
         ];
     }
 
@@ -55,6 +62,13 @@ class EditChannel extends Component
             'slug' => $this->channel->slug,
             'description' => $this->channel->description,
         ]);
+
+        if ($this->image) {
+            $image = $this->image->storeAs('images', sprintf('%s.png', $this->channel->uid));
+            $this->channel->update([
+                'image' => $image,
+            ]);
+        }
 
         session()->flash('message', 'Channel updated');
 

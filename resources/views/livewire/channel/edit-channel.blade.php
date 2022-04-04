@@ -35,6 +35,23 @@
                 @enderror
             </div>
         </div>
+        <div class="row mb-3">
+            <div class="offset-4 col-md-6">
+                <input type="file" class="form-control" wire:model="image">
+                @error('image')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
+        @if ($image)
+            <div class="row mb-3">
+                <div class="offset-4 col-md-6">
+                    <img src="{{ $image->temporaryUrl() }}" class="img-thumbnail">
+                </div>
+            </div>
+        @endif
 
         <div class="row mb-3">
             <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
