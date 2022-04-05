@@ -137,6 +137,33 @@ start: add-hooks add-hosts .env run vendor assets init-database ## Run project
 .PHONY: start-nginx-proxy add-certificates nginx-setup
 
 ##
+## Config Caching
+## -----------------
+config-cache: ## Boosting performance
+	$(ARTISAN) config:cache
+
+config-clear: ## Clear the config cache
+	$(ARTISAN) config:clear
+
+##
+## Route Caching
+## -----------------
+route-cache: ## Boosting performance
+	$(ARTISAN) route:cache
+
+route-clear: ## Clear the route cache
+	$(ARTISAN) route:clear
+
+##
+## Optimization
+## -----------------
+classmap-optimize: ## Classmap Optimization
+	$(ARTISAN) optimize --force
+
+composer-optimize: ## Composer Optimization
+	$(COMPOSER) dumpautoload -o
+
+##
 ## Vendor and Assets
 ## -----------------
 
@@ -157,17 +184,19 @@ assets: ## Compile assets
 	$(DOCKER) run  --rm -v `pwd`/:/project -w /project node:lts-alpine npm run --cache .npm/cache dev
 
 migration: ## Generate a new doctrine migration
-	$(ARTISAN) doctrine:migrations:diff
+	printf " 💽\033[33m TODO \033[0m\n"
+	#$(ARTISAN) doctrine:migrations:diff
 
 migration-sql: ## Generate a new doctrine migration
-	$(ARTISAN) doctrine:schema:update --dump-sql
+	printf " 💽\033[33m TODO \033[0m\n"
+	#$(ARTISAN) doctrine:schema:update --dump-sql
 
 migrate: ## Play latest doctrine migrations on comutitres and alert database
-	#$(ARTISAN) doctrine:migrations:migrate --no-interaction --allow-no-migration $(QUIET_PARAM)
 	$(ARTISAN) migrate $(QUIET_PARAM)
 
 db-validate-schema: ## Validate the doctrine ORM mapping
-	$(ARTISAN) doctrine:schema:validate
+	printf " 💽\033[33m TODO \033[0m\n"
+	#$(ARTISAN) doctrine:schema:validate
 
 init-database: ## Delete and create database with user
 	$(call display," 💽\033[33m Initialize database ... \033[0m\n")
