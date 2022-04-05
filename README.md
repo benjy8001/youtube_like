@@ -13,6 +13,7 @@ artisan vendor:publish --provider="Intervention\Image\ImageServiceProviderLarave
 artisan storage:link
 artisan make:modle Video -mc
 artisan queue:table
+artisan make:livewire Video/CreateVideo
 
 > ci migrate validate
 
