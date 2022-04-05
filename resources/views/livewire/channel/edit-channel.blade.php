@@ -1,6 +1,10 @@
 <div>
     @if ($channel->name)
-        <img src="{{ secure_asset('images/' . $channel->image) }}">
+        <div class="row mb-3">
+            <div class="offset-4 col-md-6">
+                <img src="{{ secure_asset('images/' . $channel->image) }}?ver={{ filemtime(public_path('images/' . $channel->image)) }}">
+            </div>
+        </div>
     @endif
 
     <form wire:submit.prevent="update">
@@ -20,9 +24,9 @@
             <div class="col-md-6">
                 <input type="text" class="form-control" wire:model="channel.slug">
                 @error('channel.slug')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
                 @enderror
             </div>
         </div>
@@ -31,9 +35,9 @@
             <div class="col-md-6">
                 <textarea class="form-control" cols="30" rows="4" wire:model="channel.description"></textarea>
                 @error('channel.description')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
                 @enderror
             </div>
         </div>
@@ -42,8 +46,8 @@
                 <input type="file" class="form-control" wire:model="image">
                 @error('image')
                 <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                    <strong>{{ $message }}</strong>
+                </span>
                 @enderror
             </div>
         </div>

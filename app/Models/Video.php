@@ -5,9 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Channel extends Model
+class Video extends Model
 {
     use HasFactory;
 
@@ -19,22 +18,14 @@ class Channel extends Model
      */
     public function getRouteKeyName(): string
     {
-        return 'slug';
+        return 'uid';
     }
 
     /**
      * @return BelongsTo
      */
-    public function user(): BelongsTo
+    public function channel(): BelongsTo
     {
-        return $this->belongsTo(User::class);
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function videos(): HasMany
-    {
-        return $this->hasMany(Video::class);
+        return $this->belongsTo(Channel::class);
     }
 }

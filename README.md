@@ -11,6 +11,8 @@ artisan make:policy ChannelPolicy
 composer require intervention/image
 artisan vendor:publish --provider="Intervention\Image\ImageServiceProviderLaravelRecent"
 artisan storage:link
+artisan make:modle Video -mc
+artisan queue:table
 
 > ci migrate validate
 
