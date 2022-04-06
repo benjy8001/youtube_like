@@ -17,7 +17,7 @@ class EditChannel extends Component
     use WithFileUploads;
 
     /** @var Channel */
-    public $channel;
+    public Channel $channel;
 
     /** @var TemporaryUploadedFile */
     public $image;
