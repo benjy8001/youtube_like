@@ -9,6 +9,10 @@ RUN apt-get update && \
     a2enmod rewrite && \
     apt-get remove -y $PHPIZE_DEPS
 
+RUN mv /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini && \
+    sed -i 's@^upload_max_filesize = 2M@upload_max_filesize = 30M@g' /usr/local/etc/php/php.ini && \
+    sed -i 's@^post_max_size = 8M@post_max_size = 31M@g' /usr/local/etc/php/php.ini
+
 RUN set -eux; \
 	apt-get install -y gosu; \
 	rm -rf /var/lib/apt/lists/*; \
@@ -16,6 +20,3 @@ RUN set -eux; \
     adduser -D -h /home -s /bin/sh -G bar foo
 
 WORKDIR /var/www/
-#RUN unlink /etc/apache2/sites-enabled/000-default.conf
-
-#COPY ./docker/vhost.d /etc/apache2/sites-enabled/000-default.conf
