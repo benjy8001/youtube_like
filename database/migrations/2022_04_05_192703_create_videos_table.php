@@ -25,7 +25,7 @@ return new class extends Migration
             $table->boolean('processed')->default(false);
             $table->boolean('allow_likes')->default(false);
             $table->boolean('allow_comments')->default(false);
-            $table->string('processing_percentage');
+            $table->unsignedTinyInteger('processing_percentage')->default(0);
 
             $table->foreign('channel_id')->references('id')->on('channels')->cascadeOnDelete();
 

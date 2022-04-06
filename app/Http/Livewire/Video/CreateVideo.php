@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Video;
 use App\Models\Channel;
 use App\Models\Video;
 use Illuminate\Contracts\View\View;
+use Illuminate\Routing\Redirector;
 use Livewire\Component;
 use Livewire\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
@@ -17,6 +18,10 @@ class CreateVideo extends Component
     public Video $video;
     /** @var TemporaryUploadedFile */
     public $videoFile;
+
+    protected $rules = [
+        'videoFile' => 'required|file|mimes:mp4|max:12228'
+    ];
 
     public function mount(Channel $channel): void
     {
@@ -33,10 +38,21 @@ class CreateVideo extends Component
     }
 
     /**
-     *
+     * @return Redirector
      */
-    public function fileCompleted(): void
+    public function fileCompleted(): Redirector
     {
-        dd('fileCompleted');
+        $this->validate();
+        $this->video = $this->channel->videos()->create([
+            'title' => 'untitle',
+            'description' => 'none',
+            'uid' => uniqid(true),
+            'visibility' => 'private',
+        ]);
+
+        return redirect()->route('video.edit', [
+            'channel' => $this->channel,
+            'video' => $this->video,
+        ]);
     }
 }

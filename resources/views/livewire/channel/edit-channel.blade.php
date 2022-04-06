@@ -11,7 +11,7 @@
         <div class="row mb-3">
             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
             <div class="col-md-6">
-                <input type="text" class="form-control" wire:model="channel.name">
+                <input type="text" class="form-control @error('channel.name') is-invalid @enderror" wire:model="channel.name">
                 @error('channel.name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -22,7 +22,7 @@
         <div class="row mb-3">
             <label for="slug" class="col-md-4 col-form-label text-md-end">{{ __('Slug') }}</label>
             <div class="col-md-6">
-                <input type="text" class="form-control" wire:model="channel.slug">
+                <input type="text" class="form-control @error('channel.slug') is-invalid @enderror" wire:model="channel.slug">
                 @error('channel.slug')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -33,7 +33,7 @@
         <div class="row mb-3">
             <label for="description" class="col-md-4 col-form-label text-md-end">{{ __('Description') }}</label>
             <div class="col-md-6">
-                <textarea class="form-control" cols="30" rows="4" wire:model="channel.description"></textarea>
+                <textarea class="form-control @error('channel.description') is-invalid @enderror" cols="30" rows="4" wire:model="channel.description"></textarea>
                 @error('channel.description')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -43,7 +43,7 @@
         </div>
         <div class="row mb-3">
             <div class="offset-4 col-md-6">
-                <input type="file" class="form-control" wire:model="image">
+                <input type="file" class="form-control @error('image') is-invalid @enderror" wire:model="image">
                 @error('image')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

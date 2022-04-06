@@ -14,7 +14,7 @@
                             <div class="progress-bar" role="progressbar" :style="`width: ${progress}%`" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <form x-show="!isUploading">
-                            <input type="file" wire:model="videoFile">
+                            <input type="file" class="form-control @error('videoFile') is-invalid @enderror" wire:model="videoFile">
                             @error('videoFile')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
