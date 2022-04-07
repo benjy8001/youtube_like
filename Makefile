@@ -215,7 +215,7 @@ lt: ## lint twig files
 	$(QA) find . -iname '*.twig' -exec  twig-lint  -q lint {} \;
 
 ly: ## lint yaml files
-	$(QA) sh -c  "find -iname '*.yml' -print0 | xargs -0 -n1  yaml-lint;"
+	$(QA) sh -c  "find -iname '*.yml' -not -path './vendor/*' -not -path './node_modules/*' -print0 | xargs -0 -n1  yaml-lint;"
 
 lp: ## lint php files
 	$(QA) parallel-lint --blame --exclude vendor .
