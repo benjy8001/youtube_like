@@ -1,21 +1,36 @@
-source .autoaliases.sh
-composer create-project laravel/laravel --prefer-dist .
-composer require laravel/ui
-artisan ui bootstrap --auth
-npm install
-npm run --cache .npm/cache dev
-composer require livewire/livewire
-artisan livewire:publish --config
-artisan make:livewire Channel\\EditChannel
-artisan make:policy ChannelPolicy
-composer require intervention/image
-artisan vendor:publish --provider="Intervention\Image\ImageServiceProviderLaravelRecent"
-artisan storage:link
-artisan make:modle Video -mc
-artisan queue:table
-artisan make:livewire Video/CreateVideo
+<h1 align='center'>
+  YouTube Like 👨‍💻
+</h1>
 
-> ci migrate validate
+<p align='center'>
+  A PHP project in order to upload videos, processing and playing them.
+</p>
+
+---
+---
+<details>
+    <summary>📃 Commands history</summary>
+
+        source .autoaliases.sh
+        composer create-project laravel/laravel --prefer-dist .
+        composer require laravel/ui
+        artisan ui bootstrap --auth
+        npm install
+        npm run --cache .npm/cache dev
+        composer require livewire/livewire
+        artisan livewire:publish --config
+        artisan make:livewire Channel\\EditChannel
+        artisan make:policy ChannelPolicy
+        composer require intervention/image
+        artisan vendor:publish --provider="Intervention\Image\ImageServiceProviderLaravelRecent"
+        artisan storage:link
+        artisan make:modle Video -mc
+        artisan queue:table
+        artisan make:livewire Video/CreateVideo
+
+</details>
+---
+
 
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
