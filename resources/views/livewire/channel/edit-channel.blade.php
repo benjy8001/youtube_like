@@ -1,5 +1,5 @@
 <div>
-    @if ($channel->name)
+    @if ($channel->image)
         <div class="row mb-3">
             <div class="offset-4 col-md-6">
                 <img src="{{ secure_asset('images/' . $channel->image) }}?ver={{ filemtime(public_path('images/' . $channel->image)) }}">
