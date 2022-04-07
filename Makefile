@@ -131,6 +131,7 @@ remove-hosts:login-sudo
 
 .env:
 	cp .env.example .env
+	#$(ARTISAN) key:generate
 
 start: add-hooks add-hosts .env run vendor assets init-database ## Run project
 
@@ -166,11 +167,10 @@ composer-optimize: ## Composer Optimization
 ##
 ## Vendor and Assets
 ## -----------------
-
 composer.lock: ## Run composer update
 	$(COMPOSER) update --lock --no-interaction --no-suggest
 
-vendor: composer.lock ## Run composer install
+vendor: composer.lock .env ## Run composer install
 	printf " 💽\033[33m Start Composer ... \033[0m\n"
 	$(COMPOSER) install ${QUIET_PARAM}
 

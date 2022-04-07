@@ -20,7 +20,7 @@ class CreateVideo extends Component
     public $videoFile;
 
     protected $rules = [
-        'videoFile' => 'required|file|mimes:mp4|max:12228'
+        'videoFile' => 'required|file|mimes:mp4|max:12228',
     ];
 
     public function mount(Channel $channel): void

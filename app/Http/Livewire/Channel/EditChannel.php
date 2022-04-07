@@ -23,19 +23,6 @@ class EditChannel extends Component
     public $image;
 
     /**
-     * @return string[]
-     */
-    protected function rules(): array
-    {
-        return[
-            'channel.name' => 'required|max:255|unique:channels,name,' . $this->channel->id,
-            'channel.slug' => 'required|max:255|unique:channels,slug,' . $this->channel->id,
-            'channel.description' => 'nullable|max:1024',
-            'image' => 'nullable|image|max:1024',
-        ];
-    }
-
-    /**
      * @param Channel $channel
      */
     public function mount(Channel $channel): void
@@ -81,5 +68,18 @@ class EditChannel extends Component
         session()->flash('message', 'Channel updated');
 
         return redirect()->route('channel.edit', ['channel' => $this->channel->slug]);
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function rules(): array
+    {
+        return [
+            'channel.name' => 'required|max:255|unique:channels,name,'.$this->channel->id,
+            'channel.slug' => 'required|max:255|unique:channels,slug,'.$this->channel->id,
+            'channel.description' => 'nullable|max:1024',
+            'image' => 'nullable|image|max:1024',
+        ];
     }
 }

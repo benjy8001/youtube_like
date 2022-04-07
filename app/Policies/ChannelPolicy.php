@@ -11,8 +11,9 @@ class ChannelPolicy
     use HandlesAuthorization;
 
     /**
-     * @param User $user
+     * @param User    $user
      * @param Channel $channel
+     *
      * @return bool
      */
     public function update(User $user, Channel $channel): bool
