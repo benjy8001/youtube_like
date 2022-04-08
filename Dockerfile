@@ -1,7 +1,7 @@
 FROM php:8.0-apache
 
 RUN apt-get update && \
-    apt-get install -y $PHPIZE_DEPS libjpeg-dev libpng-dev zlib1g-dev libonig-dev libzip-dev libfreetype6-dev && \
+    apt-get install -y $PHPIZE_DEPS libjpeg-dev libpng-dev zlib1g-dev libonig-dev libzip-dev libfreetype6-dev ffmpeg && \
     pecl install xdebug && \
     docker-php-ext-enable xdebug && \
     docker-php-ext-configure gd --with-jpeg --with-freetype && \

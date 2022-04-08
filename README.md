@@ -27,6 +27,7 @@
         artisan make:modle Video -mc
         artisan queue:table
         artisan make:livewire Video/CreateVideo
+        artisan vendor:publish --provider="ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider"
 
 </details>
 ---
