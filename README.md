@@ -28,6 +28,8 @@
         artisan queue:table
         artisan make:livewire Video/CreateVideo
         artisan vendor:publish --provider="ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider"
+        artisan make:job CreateThumbnailFromVideo
+        artisan make:job ConvertVideoForStreaming
 
 </details>
 ---
