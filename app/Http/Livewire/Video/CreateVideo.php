@@ -43,9 +43,11 @@ class CreateVideo extends Component
     public function fileCompleted(): Redirector
     {
         $this->validate();
+        $path = $this->videoFile->store('video-temp');
         $this->video = $this->channel->videos()->create([
             'title' => 'untitle',
             'description' => 'none',
+            'path' => explode('/', $path)[1], //@todo: method to do that
             'uid' => uniqid(true),
             'visibility' => 'private',
         ]);
