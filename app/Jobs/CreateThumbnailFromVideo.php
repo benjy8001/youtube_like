@@ -32,7 +32,7 @@ class CreateThumbnailFromVideo implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         $destination = sprintf('/%s/%s.png', $this->video->uid, $this->video->uid);
         FFMpeg::fromDisk('videos-temp')

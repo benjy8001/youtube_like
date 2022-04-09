@@ -30,6 +30,7 @@
         artisan vendor:publish --provider="ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider"
         artisan make:job CreateThumbnailFromVideo
         artisan make:job ConvertVideoForStreaming
+        artisan queue:work --tries=3
 
 </details>
 ---

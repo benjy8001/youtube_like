@@ -28,7 +28,7 @@ class VideoEncode extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         $low = (new X264('aac'))->setKiloBitrate(500);
         $high = (new X264('aac'))->setKiloBitrate(1000);
