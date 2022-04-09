@@ -22,6 +22,18 @@ class Video extends Model
     }
 
     /**
+     * @return string
+     */
+    public function getThumbnailAttribute(): ?string
+    {
+        if (null !== $this->thumbnail_image) {
+            return sprintf('/videos/%s/%s', $this->uid, $this->thumbnail_image);
+        }
+
+        return '/videos/default.jpg';
+    }
+
+    /**
      * @return BelongsTo
      */
     public function channel(): BelongsTo

@@ -2,6 +2,14 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="{{ secure_asset($this->video->thumbnail) }}" alt="" class="img-thumbnail">
+                    </div>
+                    <div class="col-md-4">
+                        <p>Processing ({{ $this->video->processing_percentage }})</p>
+                    </div>
+                </div>
                 <form wire:submit.prevent="update">
                     <div class="row mb-3">
                         <label for="title" class="col-md-4 col-form-label text-md-end">{{ __('Title') }}</label>
