@@ -19,10 +19,12 @@
                                 <div class="col-md-2">
                                     {{ $video->created_at->format('d/m/Y') }}
                                 </div>
+                                @if (auth()->user()->owns($video))
                                 <div class="col-md-2">
                                     <a href="{{ route('video.edit', ['channel' => auth()->user()->channel, 'video' => $video->uid]) }}" class="btn btn-light btn-sm">{{ __('Edit') }}</a>
                                     <a wire:click.prevent="delete('{{ $video->uid }}')" class="btn btn-danger btn-sm">{{ __('Delete') }}</a>
                                 </div>
+                                @endif
                             </div>
                         </div>
                     </div>
