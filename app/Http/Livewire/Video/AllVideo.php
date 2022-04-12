@@ -27,6 +27,7 @@ class AllVideo extends Component
 
     /**
      * @param Video $video
+     *
      * @return RedirectResponse
      */
     public function delete(Video $video): RedirectResponse

@@ -20,7 +20,7 @@ class EditVideo extends Component
 
     /**
      * @param Channel $channel
-     * @param Video $video
+     * @param Video   $video
      */
     public function mount(Channel $channel, Video $video): void
     {
@@ -28,9 +28,6 @@ class EditVideo extends Component
         $this->video = $video;
     }
 
-    /**
-     *
-     */
     public function update(): void
     {
         $this->validate();

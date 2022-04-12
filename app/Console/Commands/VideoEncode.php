@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use FFMpeg\Format\Video\X264;
 use Illuminate\Console\Command;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
-use function Symfony\Component\Translation\t;
 
 class VideoEncode extends Command
 {
@@ -47,6 +46,7 @@ class VideoEncode extends Command
             })
             ->toDisk('videos-temp')
             ->save('/test/sample.m3u8');
+
         return 0;
     }
 }

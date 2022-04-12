@@ -49,7 +49,7 @@ class CreateVideo extends Component
         $this->video = $this->channel->videos()->create([
             'title' => 'untitle',
             'description' => 'none',
-            'path' => explode('/', $path)[1], //@todo: method to do that
+            'path' => explode('/', $path)[1], // @todo: method to do that
             'uid' => uniqid(true),
             'visibility' => 'private',
         ]);

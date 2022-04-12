@@ -5,7 +5,6 @@ namespace App\Jobs;
 use App\Models\Video;
 use FFMpeg\Format\Video\X264;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -14,12 +13,17 @@ use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 
 class ConvertVideoForStreaming implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     public Video $video;
 
     /**
      * Create a new job instance.
+     *
+     * @param Video $video
      *
      * @return void
      */
@@ -35,7 +39,7 @@ class ConvertVideoForStreaming implements ShouldQueue
      */
     public function handle(): void
     {
-        $destination = sprintf('/%s/%s.m3u8', $this->video->uid, $this->video->uid); //@todo: common with CreateThumbnail, except extension
+        $destination = sprintf('/%s/%s.m3u8', $this->video->uid, $this->video->uid); // @todo: common with CreateThumbnail, except extension
         $low = (new X264('aac'))->setKiloBitrate(500);
         $high = (new X264('aac'))->setKiloBitrate(1000);
 

@@ -4,7 +4,6 @@ namespace App\Jobs;
 
 use App\Models\Video;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -13,12 +12,17 @@ use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 
 class CreateThumbnailFromVideo implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     public Video $video;
 
     /**
      * Create a new job instance.
+     *
+     * @param Video $video
      *
      * @return void
      */
@@ -42,7 +46,7 @@ class CreateThumbnailFromVideo implements ShouldQueue
             ->toDisk('videos')
             ->save($destination);
         $this->video->update([
-           'thumbnail_image' =>  sprintf('%s.png', $this->video->uid),
+           'thumbnail_image' => sprintf('%s.png', $this->video->uid),
         ]);
     }
 }
