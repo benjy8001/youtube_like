@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 
 class ConvertVideoForStreaming implements ShouldQueue
@@ -64,5 +65,7 @@ class ConvertVideoForStreaming implements ShouldQueue
             'processed' => true,
             'processed_file' => sprintf('%s.m3u8', $this->video->uid),
         ]);
+
+        Storage::disk('videos-temp')->delete($this->video->path);
     }
 }
