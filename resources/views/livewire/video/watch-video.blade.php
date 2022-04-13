@@ -5,16 +5,18 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <video controls preload="auto" class="video-js" data-setup="{}">
-                    <source src="{{ secure_asset('videos/' . $video->uid . '/' . $video->processed_file) }}" type="application/x-mpegURL" />
-                    <p class="vjs-no-js">
-                        To view this video please enable JavaScript, and consider upgrading to a
-                        web browser that
-                        <a href="https://videojs.com/html5-video-support/" target="_blank"
-                        >supports HTML5 video</a
-                        >
-                    </p>
-                </video>
+                <div class="video-container">
+                    <video controls preload="auto" id="yt-video" class="video-js vjs-fill vjs-styles=defaults vjs-big-play-centered" data-setup="{}">
+                        <source src="{{ secure_asset('videos/' . $video->uid . '/' . $video->processed_file) }}" type="application/x-mpegURL" />
+                        <p class="vjs-no-js">
+                            To view this video please enable JavaScript, and consider upgrading to a
+                            web browser that
+                            <a href="https://videojs.com/html5-video-support/" target="_blank"
+                            >supports HTML5 video</a
+                            >
+                        </p>
+                    </video>
+                </div>
             </div>
         </div>
     </div>
