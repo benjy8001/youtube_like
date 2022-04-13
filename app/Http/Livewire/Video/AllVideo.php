@@ -13,12 +13,12 @@ use Livewire\WithPagination;
 
 class AllVideo extends Component
 {
-    use WithPagination;
     use AuthorizesRequests;
-
-    protected $paginationTheme = 'bootstrap';
+    use WithPagination;
 
     public Channel $channel;
+
+    protected $paginationTheme = 'bootstrap';
 
     public function mount(Channel $channel): void
     {
