@@ -36,7 +36,8 @@
                     <h1>{{ __('No videos uploaded') }}</h1>
                 @endif
             </div>
-
+        </div>
+        <div class="row justify-content-center align-items-center">
             {{ $videos->links() }}
         </div>
     </div>

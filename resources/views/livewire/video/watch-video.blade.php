@@ -4,7 +4,7 @@
     @endpush
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 p-0">
                 <div class="video-container">
                     <video controls preload="auto" id="yt-video" class="video-js vjs-fill vjs-styles=defaults vjs-big-play-centered" data-setup="{}" wire:ignore>
                         <source src="{{ secure_asset('videos/' . $video->uid . '/' . $video->processed_file) }}" type="application/x-mpegURL" />
@@ -17,6 +17,30 @@
                         </p>
                     </video>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h3 class="mt-3">{{ $video->title }}</h3>
+                                <p class="gray-text">{{ $video->views }} views. {{ $video->uploaded_date }}</p>
+                            </div>
+                            <div>
+                                <button>{{ __('LIKE') }}</button>
+                                <button>{{ __('DISLIKE') }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
             </div>
         </div>
     </div>
