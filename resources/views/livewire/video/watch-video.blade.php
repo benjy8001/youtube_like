@@ -29,8 +29,7 @@
                                 <p class="gray-text">{{ $video->views }} views. {{ $video->uploaded_date }}</p>
                             </div>
                             <div>
-                                <button>{{ __('LIKE') }}</button>
-                                <button>{{ __('DISLIKE') }}</button>
+                                <livewire:video.voting :video="$video" />
                             </div>
                         </div>
                     </div>
