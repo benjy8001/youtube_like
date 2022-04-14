@@ -8,6 +8,9 @@ use Livewire\Component;
 
 class WatchVideo extends Component
 {
+    protected $listeners = [
+        'VideoViewed' => 'increaseView',
+    ];
     public Video $video;
 
     /**
@@ -16,6 +19,12 @@ class WatchVideo extends Component
     public function mount(Video $video): void
     {
         $this->video = $video;
+    }
+
+    public function increaseView(): void{
+        $this->video->update([
+            'views' => ++$this->video->views,
+        ]);
     }
 
     /**
