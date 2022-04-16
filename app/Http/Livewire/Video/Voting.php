@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\Video;
 
-use App\Models\Dislike;
 use App\Models\Like;
 use App\Models\Video;
 use Illuminate\View\View;
@@ -11,10 +10,10 @@ use Livewire\Component;
 class Voting extends Component
 {
     public Video $video;
-    public Like $likes;
-    public Dislike $dislike;
-    public $likeActive;
-    public $dislikeActive;
+    public int $likes = 0;
+    public int $dislike = 0;
+    public bool $likeActive = true;
+    public bool $dislikeActive = true;
 
     /**
      * @param Video $video
@@ -29,6 +28,8 @@ class Voting extends Component
      */
     public function render(): View
     {
+        $this->likes = $this->video->likes->count();
+        $this->dislikes = $this->video->dislikes->count();
         return view('livewire.video.voting')
             ->extends('layouts.app');
     }
@@ -38,9 +39,15 @@ class Voting extends Component
      */
     public function like(): void
     {
+        if ($this->video->doesUserLikedVideo()) {
+            Like::where('user_id', auth()->id())->where('video_id', $this->video->id)->delete();
+            $this->likeActive = false;
+            return;
+        }
         $this->video->likes()->create([
             'user_id' => auth()->id(),
         ]);
+        $this->likeActive = true;
     }
 
     /**

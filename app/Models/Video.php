@@ -67,4 +67,20 @@ class Video extends Model
     {
         return $this->hasMany(Dislike::class);
     }
+
+    /**
+     * @return bool
+     */
+    public function doesUserLikedVideo(): bool
+    {
+        return $this->likes()->where('user_id', auth()->id())->exists();
+    }
+
+    /**
+     * @return bool
+     */
+    public function doesUserDislikedVideo(): bool
+    {
+        return $this->dislikes()->where('user_id', auth()->id())->exists();
+    }
 }
