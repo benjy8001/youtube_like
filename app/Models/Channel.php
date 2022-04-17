@@ -23,6 +23,18 @@ class Channel extends Model
     }
 
     /**
+     * @return string
+     */
+    public function getPictureAttribute(): ?string
+    {
+        if (null !== $this->image) {
+            return sprintf('/images/%s', $this->image);
+        }
+
+        return '/images/channel_default.png';
+    }
+
+    /**
      * @return BelongsTo
      */
     public function user(): BelongsTo
