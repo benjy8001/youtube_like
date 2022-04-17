@@ -16,6 +16,10 @@ class Voting extends Component
     public bool $likeActive = true;
     public bool $dislikeActive = true;
 
+    protected $listeners = [
+        'LoadValues' => '$refresh',
+    ];
+
     /**
      * @param Video $video
      */
@@ -45,12 +49,13 @@ class Voting extends Component
         if ($this->video->doesUserLikedVideo()) {
             Like::where('user_id', auth()->id())->where('video_id', $this->video->id)->delete();
             $this->likeActive = false;
-            return;
+        } else {
+            $this->video->likes()->create([
+                'user_id' => auth()->id(),
+            ]);
+            $this->likeActive = true;
         }
-        $this->video->likes()->create([
-            'user_id' => auth()->id(),
-        ]);
-        $this->likeActive = true;
+        $this->emit('LoadValues');
     }
 
     /**
@@ -61,12 +66,13 @@ class Voting extends Component
         if ($this->video->doesUserDislikedVideo()) {
             Dislike::where('user_id', auth()->id())->where('video_id', $this->video->id)->delete();
             $this->dislikeActive = false;
-            return;
+        } else {
+            $this->video->dislikes()->create([
+                'user_id' => auth()->id(),
+            ]);
+            $this->dislikeActive = true;
         }
-        $this->video->dislikes()->create([
-            'user_id' => auth()->id(),
-        ]);
-        $this->dislikeActive = true;
+        $this->emit('LoadValues');
     }
 
     /**
