@@ -22,6 +22,8 @@ class Voting extends Component
     public function mount(Video $video): void
     {
         $this->video = $video;
+        $this->checkIfLike();
+        $this->checkIfDislike();
     }
 
     /**
@@ -65,5 +67,21 @@ class Voting extends Component
             'user_id' => auth()->id(),
         ]);
         $this->dislikeActive = true;
+    }
+
+    /**
+     *
+     */
+    public function checkIfLike(): void
+    {
+        $this->likeActive = $this->video->doesUserLikedVideo();
+    }
+
+    /**
+     *
+     */
+    public function checkIfDislike(): void
+    {
+        $this->dislikeActive = $this->video->doesUserDislikedVideo();
     }
 }
