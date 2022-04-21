@@ -6,8 +6,8 @@ use Illuminate\Validation\Rules\Enum;
 
 class VideoVisibilityEnum extends Enum
 {
-    const __DEFAULT = self::PRIVATE;
+    public const __DEFAULT = self::PRIVATE;
 
-    const PRIVATE = 'private';
-    const PUBLIC = 'public';
+    public const PRIVATE = 'private';
+    public const PUBLIC = 'public';
 }
