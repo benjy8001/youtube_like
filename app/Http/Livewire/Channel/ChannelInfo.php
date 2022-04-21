@@ -9,6 +9,7 @@ use Livewire\Component;
 class ChannelInfo extends Component
 {
     public Channel $channel;
+    public bool $userSubscribed = false;
 
     /**
      * @param Channel $channel
@@ -18,6 +19,7 @@ class ChannelInfo extends Component
     public function mount(Channel $channel): void
     {
         $this->channel = $channel;
+        $this->userSubscribed = auth()->user()->isSubscribedTo($channel);
     }
 
     /**
