@@ -41,6 +41,7 @@ class Video extends Model
     public function getUploadedDateAttribute(): string
     {
         $d = new Carbon($this->created_at);
+
         return $d->toFormattedDateString();
     }
 

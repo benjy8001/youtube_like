@@ -11,6 +11,7 @@ class ChannelController extends Controller
 {
     /**
      * @param Channel $channel
+     *
      * @return View
      */
     public function index(Channel $channel): View
@@ -20,6 +21,7 @@ class ChannelController extends Controller
 
     /**
      * @param Channel $channel
+     *
      * @return View
      */
     public function edit(Channel $channel): View

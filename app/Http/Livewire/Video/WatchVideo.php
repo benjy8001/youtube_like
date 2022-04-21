@@ -8,10 +8,10 @@ use Livewire\Component;
 
 class WatchVideo extends Component
 {
+    public Video $video;
     protected $listeners = [
         'VideoViewed' => 'increaseView',
     ];
-    public Video $video;
 
     /**
      * @param Video $video
@@ -21,7 +21,8 @@ class WatchVideo extends Component
         $this->video = $video;
     }
 
-    public function increaseView(): void{
+    public function increaseView(): void
+    {
         $this->video->update([
             'views' => ++$this->video->views,
         ]);

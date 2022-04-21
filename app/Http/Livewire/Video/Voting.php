@@ -37,13 +37,11 @@ class Voting extends Component
     {
         $this->likes = $this->video->likes->count();
         $this->dislikes = $this->video->dislikes->count();
+
         return view('livewire.video.voting')
             ->extends('layouts.app');
     }
 
-    /**
-     *
-     */
     public function like(): void
     {
         if ($this->video->doesUserLikedVideo()) {
@@ -59,9 +57,6 @@ class Voting extends Component
         $this->emit('LoadValues');
     }
 
-    /**
-     *
-     */
     public function dislike(): void
     {
         if ($this->video->doesUserDislikedVideo()) {
@@ -77,34 +72,22 @@ class Voting extends Component
         $this->emit('LoadValues');
     }
 
-    /**
-     *
-     */
     public function checkIfLike(): void
     {
         $this->likeActive = $this->video->doesUserLikedVideo();
     }
 
-    /**
-     *
-     */
     public function checkIfDislike(): void
     {
         $this->dislikeActive = $this->video->doesUserDislikedVideo();
     }
 
-    /**
-     *
-     */
     public function disableDislike(): void
     {
         Dislike::where('user_id', auth()->id())->where('video_id', $this->video->id)->delete();
         $this->dislikeActive = false;
     }
 
-    /**
-     *
-     */
     public function disableLike(): void
     {
         Like::where('user_id', auth()->id())->where('video_id', $this->video->id)->delete();
