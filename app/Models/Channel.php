@@ -49,4 +49,20 @@ class Channel extends Model
     {
         return $this->hasMany(Video::class);
     }
+
+    /**
+     * @return HasMany
+     */
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    /**
+     * @return int
+     */
+    public function subscribers(): int
+    {
+        return $this->subscriptions()->count();
+    }
 }

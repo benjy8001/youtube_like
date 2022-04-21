@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -60,5 +62,31 @@ class User extends Authenticatable
     public function owns(Video $video): bool
     {
         return $this->id = $video->channel->user_id;
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function subscribedChannel(): BelongsToMany
+    {
+        return $this->belongsToMany(Channel::class, 'subscriptions');
+    }
+
+    /**
+     * @param Channel $channel
+     *
+     * @return bool
+     */
+    public function isSubscribedTo(Channel $channel): bool
+    {
+        return (bool) $this->subscriptions()->where('channel_id', $channel->id)->count();
     }
 }
