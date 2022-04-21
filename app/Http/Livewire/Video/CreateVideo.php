@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Video;
 
+use App\Enum\VideoVisibilityEnum;
 use App\Jobs\ConvertVideoForStreaming;
 use App\Jobs\CreateThumbnailFromVideo;
 use App\Models\Channel;
@@ -51,7 +52,7 @@ class CreateVideo extends Component
             'description' => 'none',
             'path' => explode('/', $path)[1], // @todo: method to do that
             'uid' => uniqid(true),
-            'visibility' => 'private',
+            'visibility' => VideoVisibilityEnum::PRIVATE,
         ]);
         CreateThumbnailFromVideo::dispatch($this->video);
         ConvertVideoForStreaming::dispatch($this->video);

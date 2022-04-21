@@ -1,5 +1,6 @@
 <?php
 
+use App\Enum\VideoVisibilityEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,7 +21,7 @@ return new class() extends Migration {
             $table->string('uid');
             $table->text('path')->nullable();
             $table->string('processed_file')->nullable();
-            $table->enum('visibility', ['private', 'public'])->default('private');
+            $table->enum('visibility', [VideoVisibilityEnum::PRIVATE, VideoVisibilityEnum::PUBLIC])->default(VideoVisibilityEnum::PRIVATE);
             $table->boolean('processed')->default(false);
             $table->boolean('allow_likes')->default(false);
             $table->boolean('allow_comments')->default(false);

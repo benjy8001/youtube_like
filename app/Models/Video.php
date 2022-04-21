@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enum\VideoVisibilityEnum;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +15,11 @@ class Video extends Model
 
     /** @var array */
     protected $guarded = [];
+
+    /** @var string[] */
+    protected $casts = [
+        'visibility' => VideoVisibilityEnum::class,
+    ];
 
     /**
      * @return string
