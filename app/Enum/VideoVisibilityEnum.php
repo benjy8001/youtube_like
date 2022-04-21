@@ -2,9 +2,8 @@
 
 namespace App\Enum;
 
-use Illuminate\Validation\Rules\Enum;
 
-class VideoVisibilityEnum extends Enum
+final class VideoVisibilityEnum
 {
     public const __DEFAULT = self::PRIVATE;
 

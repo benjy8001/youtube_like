@@ -16,11 +16,6 @@ class Video extends Model
     /** @var array */
     protected $guarded = [];
 
-    /** @var string[] */
-    protected $casts = [
-        'visibility' => VideoVisibilityEnum::class,
-    ];
-
     /**
      * @return string
      */
