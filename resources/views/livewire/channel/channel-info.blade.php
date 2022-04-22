@@ -8,7 +8,7 @@
             </div>
         </div>
         <div>
-            <button class="btn btn-lg text-uppercase {{ $userSubscribed ? 'sub-btn' : 'sub-btn-active' }}">
+            <button wire:click.prevent="toggle" class="btn btn-lg text-uppercase {{ $userSubscribed ? 'sub-btn' : 'sub-btn-active' }}">
                 {{ $userSubscribed ? __('Unsubscribe') : __('Subscribe') }}
             </button>
         </div>
