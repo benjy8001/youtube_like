@@ -70,6 +70,14 @@ class Video extends Model
     }
 
     /**
+     * @return HasMany
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
      * @return bool
      */
     public function doesUserLikedVideo(): bool
