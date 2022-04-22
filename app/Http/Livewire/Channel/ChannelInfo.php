@@ -4,10 +4,10 @@ namespace App\Http\Livewire\Channel;
 
 use App\Models\Channel;
 use App\Models\Subscription;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\Redirector;
 
 class ChannelInfo extends Component
 {
@@ -37,9 +37,9 @@ class ChannelInfo extends Component
     }
 
     /**
-     * @return RedirectResponse|null
+     * @return Redirector|null
      */
-    public function toggle(): ?RedirectResponse
+    public function toggle(): ?Redirector
     {
         if (!Auth::check()) {
             return redirect()->route('login');
