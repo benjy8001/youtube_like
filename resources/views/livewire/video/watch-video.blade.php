@@ -44,6 +44,7 @@
                     </div>
                 </div>
                 <hr>
+                <livewire:comment.all-comments :channel="$video" />
             </div>
             <div class="col-md-2">
             </div>

@@ -23,7 +23,7 @@ class Comment extends Model
      */
     public function user(): BelongsTo
     {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -31,7 +31,7 @@ class Comment extends Model
      */
     public function video(): BelongsTo
     {
-        $this->belongsTo(Video::class);
+        return $this->belongsTo(Video::class);
     }
 
     /**
@@ -39,6 +39,6 @@ class Comment extends Model
      */
     public function replies(): HasMany
     {
-        $this->hasMany(self::class, 'reply_id', 'id');
+        return $this->hasMany(self::class, 'reply_id', 'id');
     }
 }

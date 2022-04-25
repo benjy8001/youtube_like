@@ -74,7 +74,15 @@ class Video extends Model
      */
     public function comments(): HasMany
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class)->whereNull('reply_id');
+    }
+
+    /**
+     * @return int
+     */
+    public function allCommentsCount(): int
+    {
+        return $this->hasMany(Comment::class)->count();
     }
 
     /**
