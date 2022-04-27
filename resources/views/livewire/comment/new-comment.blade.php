@@ -7,8 +7,8 @@
 
         <div class="d-flex justify-content-end align-items-end">
             @if($body)
-                <a href="">{{ __('Cancel') }}</a>
-                <a href="" class="mx-2 btn btn-secondary">{{ __('Comment') }}</a>
+                <a href="" wire:click.prevent="resetForm">{{ __('Cancel') }}</a>
+                <a href="" wire:click.prevent="addComment" class="mx-2 btn btn-secondary">{{ __('Comment') }}</a>
             @endif
         </div>
     @endif

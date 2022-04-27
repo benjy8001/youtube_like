@@ -5,7 +5,7 @@
         <div class="media-body">
             <h5 class="mt-0">
                 {{ $comment->user->name }}
-                <span class="text-muted">{{ $comment->created_at->diffForHumans }}</span>
+                <span class="text-muted">{{ $comment->created_at->diffForHumans() }}</span>
             </h5>
             {{ $comment->body }}
             @if($comment->replies->count())

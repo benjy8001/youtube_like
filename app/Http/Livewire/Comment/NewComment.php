@@ -10,16 +10,35 @@ class NewComment extends Component
 {
     public Video $video;
     public string $body = '';
-    public int $col;
+    public ?int $comId = null;
 
     /**
      * @param Video $video
-     * @param int $col
+     * @param int $comId
      */
-    public function mount(Video $video): void
+    public function mount(Video $video, int $comId): void
     {
         $this->video = $video;
-        //$this->col = $col;
+        $this->comId = empty($comId) ? null : $comId;
+    }
+
+    /**
+     *
+     */
+    public function resetForm(): void
+    {
+        $this->body = '';
+    }
+
+    public function addComment(): void
+    {
+        auth()->user()->comments()->create([
+            'body' => $this->body,
+            'video_id' => $this->video->id,
+            'reply_id' => $this->comId,
+        ]);
+
+        $this->resetForm();
     }
 
     /**
