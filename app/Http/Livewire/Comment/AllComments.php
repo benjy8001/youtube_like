@@ -8,6 +8,10 @@ use Livewire\Component;
 
 class AllComments extends Component
 {
+    protected $listeners = [
+        'CommentCreated' => '$refresh',
+    ];
+
     public Video $video;
 
     /**

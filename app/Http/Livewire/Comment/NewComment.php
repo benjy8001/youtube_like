@@ -39,6 +39,8 @@ class NewComment extends Component
         ]);
 
         $this->resetForm();
+
+        $this->emit('CommentCreated');
     }
 
     /**
