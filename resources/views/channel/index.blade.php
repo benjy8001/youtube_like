@@ -35,7 +35,7 @@
                             style="height: 174px; width:333px">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <img src="{{ secure_asset('/images/' . $video->channel->image) }}" height="40px"
+                                <img src="{{ secure_asset($video->channel->picture) }}" height="40px"
                                     class="rounded circle">
 
                                 <h4 class="ml-3">{{ $video->title }}</h4>
@@ -49,7 +49,6 @@
                         </div>
                     </div>
                 </a>
-
             </div>
             @endforeach
         </div>
