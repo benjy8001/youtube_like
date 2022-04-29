@@ -2,6 +2,14 @@
 
 @section('content')
     <div class="container">
+
+        <form action="{{ route('search.video') }}" method="POST">
+            <div class="d-flex align-items-center my-3">
+                <input type="text" name="query" id="query" class="form-control" placeholder="{{ __('Search') }}">
+                <button type="submit" class="search-btn"><i class="material-icons">search</i></button>
+            </div>
+        </form>
+
         <div class="row my-3">
             @if(empty($channels->count()))
                 <p>{{ __('$You are not subscribed to any channel !') }}</p>

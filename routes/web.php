@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChannelController;
+use App\Http\Controllers\SearchController;
 use App\Http\Livewire\Video\AllVideo;
 use App\Http\Livewire\Video\CreateVideo;
 use App\Http\Livewire\Video\EditVideo;
@@ -32,6 +33,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+//@todo: remove this route
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {
@@ -43,3 +45,4 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/channels/{channel}', [ChannelController::class, 'index'])->name('channel.index');
 Route::get('/watch/{video}', WatchVideo::class)->name('video.watch');
+Route::post('/search', [SearchController::class, 'search'])->name('search.video');
