@@ -24,6 +24,6 @@ class SearchController extends Controller
                 ->get();
         }
 
-        return view('search', compact($videos));
+        return view('search', compact('videos'));
     }
 }

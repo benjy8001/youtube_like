@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="jumbotron jumbotron-fluid bg-primary">
-    <div class="container">
-        <h1 class="display-4">{{ $channel->name }}</h1>
-        <p class="lead">{{ $channel->description }}</p>
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container py-5">
+        <h1 class="display-5 fw-bold">{{ $channel->name }}</h1>
+        <p class="col-md-8 fs-4">{{ $channel->description }}</p>
     </div>
 </div>
 
@@ -12,10 +12,10 @@
 <div class="container">
     <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
-            <img src="{{ secure_asset($channel->picture)}}" class="rounded-circle mr-3" height="130px;">
+            <img src="{{ secure_asset($channel->picture)}}" class="rounded-circle me-3" height="130px;">
             <div>
                 <h3>{{ $channel->name }}</h3>
-                <p>xx {{ __('Subscribers') }}</p>
+                <p>{{ $channel->subscribers() }} {{ __('Subscribers') }}</p>
             </div>
         </div>
         <div>

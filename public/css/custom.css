@@ -61,3 +61,21 @@ body {
     outline: none;
 }
 
+.card-link {
+    color: #6d7174;
+    text-decoration: none;
+}
+
+.card-link:hover {
+    color: #363739;
+    text-decoration: none;
+}
+
+.search-btn, .search-btn:focus {
+    border: none;
+}
+
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}
