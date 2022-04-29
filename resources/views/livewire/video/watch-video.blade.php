@@ -1,4 +1,4 @@
-<div>
+<div xmlns:livewire="http://www.w3.org/1999/html">
     @push('custom-css')
         <link href="https://vjs.zencdn.net/7.18.1/video-js.css" rel="stylesheet" />
     @endpush
