@@ -14,7 +14,7 @@ class NewComment extends Component
 
     /**
      * @param Video $video
-     * @param int $comId
+     * @param int   $comId
      */
     public function mount(Video $video, int $comId): void
     {
@@ -22,9 +22,6 @@ class NewComment extends Component
         $this->comId = empty($comId) ? null : $comId;
     }
 
-    /**
-     *
-     */
     public function resetForm(): void
     {
         $this->body = '';

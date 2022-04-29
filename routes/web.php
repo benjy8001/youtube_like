@@ -33,7 +33,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//@todo: remove this route
+// @todo: remove this route
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {
