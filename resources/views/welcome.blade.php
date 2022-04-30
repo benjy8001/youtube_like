@@ -28,7 +28,7 @@
                                         <img src="{{ secure_asset($video->channel->picture) }}" height="40px"
                                              class="rounded circle">
 
-                                        <h4 class="ml-3">{{ $video->title }}</h4>
+                                        <h4 class="ms-3">{{ $video->title }}</h4>
 
                                     </div>
                                     <p class="text-gray mt-4 font-weight-bold" style="line-height: 0.2px">

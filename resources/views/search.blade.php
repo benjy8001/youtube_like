@@ -13,12 +13,12 @@
                                          style="height: 100%; width:333px">
                                 </div>
                                 <div class="card-body">
-                                    <h4 class="ml-3">{{ $video->title }}</h4>
+                                    <h4>{{ $video->title }}</h4>
                                     <p class="text-gray font-weight-bold">{{ $video->views }} {{ __('views') }} •
                                         {{ $video->created_at->diffForHumans() }}</p>
                                     <div class="d-flex align-items-center">
                                         <img src="{{ secure_asset($video->channel->picture) }}" class="rounded circle">
-                                        <p class="text-gray font-weight-bold">
+                                        <p class="text-gray font-weight-bold ms-3">
                                             {{ $video->channel->name }}
                                         </p>
                                     </div>
