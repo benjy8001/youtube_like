@@ -8,9 +8,12 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <a href="{{ route('video.watch', ['video' => $video]) }}" alt="{{ $video->title }}">
-                                            <img src="{{ secure_asset($video->thumbnail) }}" alt="" class="img-thumbnail">
-                                        </a>
+                                        <div style="position: relative;">
+                                            <a href="{{ route('video.watch', ['video' => $video]) }}" alt="{{ $video->title }}">
+                                                <img src="{{ secure_asset($video->thumbnail) }}" alt="" class="img-thumbnail">
+                                                <div class="badge bg-dark" style="position: absolute; bottom: 8px; right: 16px;"> {{ $video->durationForHumans }}</div>
+                                            </a>
+                                        </div>
                                     </div>
                                     <div class="col-md-3">
                                         <h5>{{ $video->title }}</h5>

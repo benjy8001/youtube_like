@@ -46,6 +46,14 @@ class Video extends Model
     }
 
     /**
+     * @return string
+     */
+    public function getDurationForHumansAttribute(): string
+    {
+        return gmdate("H:i:s", $this->duration);
+    }
+
+    /**
      * @return BelongsTo
      */
     public function channel(): BelongsTo

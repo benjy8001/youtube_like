@@ -75,7 +75,7 @@ class User extends Authenticatable
     /**
      * @return BelongsToMany
      */
-    public function subscribedChannel(): BelongsToMany
+    public function subscribedChannels(): BelongsToMany
     {
         return $this->belongsToMany(Channel::class, 'subscriptions');
     }

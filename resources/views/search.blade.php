@@ -8,9 +8,8 @@
                     <a href="{{ route('video.watch', $video) }}" class="card-link">
                         <div class="card mb-4" style="border:none;">
                             <div class="card-horizontal">
-                                <div>
-                                    <img class="" src="{{ secure_asset( $video->thumbnail) }}" alt="{{ __('Card image cap') }}"
-                                         style="height: 100%; width:333px">
+                                <div style="width: 333px;">
+                                    @include('includes.videoThumbnail')
                                 </div>
                                 <div class="card-body">
                                     <h4>{{ $video->title }}</h4>

@@ -31,8 +31,7 @@
             <div class="col-12 col-md-6 col-lg-4">
                 <a href="{{ route('video.watch', $video) }}" class="card-link">
                     <div class="card mb-4" style="width: 333px; border:none;">
-                        <img class="card-img-top" src="{{ secure_asset( $video->thumbnail) }}" alt="{{ __('Card image cap') }}"
-                            style="height: 174px; width:333px">
+                        @include('includes.videoThumbnail')
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <img src="{{ secure_asset($video->channel->picture) }}" height="40px"
