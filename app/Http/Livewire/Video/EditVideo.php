@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Video;
 
 use App\Models\Channel;
+use App\Models\Repositories\VideoRepository;
 use App\Models\Video;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -28,14 +29,13 @@ class EditVideo extends Component
         $this->video = $video;
     }
 
-    public function update(): void
+    /**
+     * @param VideoRepository $videoRepository
+     */
+    public function update(VideoRepository $videoRepository): void
     {
         $this->validate();
-        $this->video->update([
-            'title' => $this->video->title,
-            'description' => $this->video->description,
-            'visibility' => $this->video->visibility,
-        ]);
+        $videoRepository->update($this->video);
 
         session()->flash('message', 'Video updated');
     }

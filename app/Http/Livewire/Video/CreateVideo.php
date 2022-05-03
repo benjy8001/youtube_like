@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire\Video;
 
-use App\Enum\VideoVisibilityEnum;
 use App\Jobs\ConvertVideoForStreaming;
 use App\Jobs\CreateThumbnailFromVideo;
 use App\Models\Channel;
+use App\Models\Repositories\VideoRepository;
 use App\Models\Video;
 use Illuminate\Contracts\View\View;
 use Illuminate\Routing\Redirector;
@@ -18,13 +18,14 @@ class CreateVideo extends Component
     use WithFileUploads;
 
     public Channel $channel;
-    public Video $video;
     /** @var TemporaryUploadedFile */
     public $videoFile;
 
     protected $rules = [
         'videoFile' => 'required|file|mimes:mp4|max:12228',
     ];
+    private Video $video;
+    private VideoRepository $videoRepository;
 
     public function mount(Channel $channel): void
     {
@@ -41,19 +42,16 @@ class CreateVideo extends Component
     }
 
     /**
+     * @param VideoRepository $videoRepository
+     *
      * @return Redirector
      */
-    public function fileCompleted(): Redirector
+    public function fileCompleted(VideoRepository $videoRepository): Redirector
     {
         $this->validate();
         $path = $this->videoFile->store('videos-temp');
-        $this->video = $this->channel->videos()->create([
-            'title' => 'untitle',
-            'description' => 'none',
-            'path' => explode('/', $path)[1], // @todo: method to do that
-            'uid' => uniqid(true),
-            'visibility' => VideoVisibilityEnum::PRIVATE,
-        ]);
+        $this->video = $videoRepository->createDefaultForChannel($this->channel->id, explode('/', $path)[1]); // @todo: method to do that
+
         CreateThumbnailFromVideo::dispatch($this->video);
         ConvertVideoForStreaming::dispatch($this->video);
 

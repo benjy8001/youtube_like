@@ -33,9 +33,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// @todo: remove this route
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::middleware('auth')->group(function () {
     Route::get('/channel/{channel}/edit', [ChannelController::class, 'edit'])->name('channel.edit');
     Route::get('/video/{channel}/create', CreateVideo::class)->name('video.create');
