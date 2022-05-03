@@ -260,7 +260,7 @@ twigcs: ## twigcs (https://github.com/friendsoftwig/twigcs)
 
 phpunit: vendor ## Run phpunit
 	printf " 💽\033[33m Start PHPUnit ... \033[0m\n"
-	$(QA) phpdbg -qrr /tools/phpunit -c . --colors=never
+	$(QA) phpdbg -qrr /tools/phpunit -c . --colors=never --exclude-group excluded,functionnal
 
 deploy:
 	printf "\033[32m Deploy to Server \033[0m\n"
