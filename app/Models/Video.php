@@ -50,7 +50,7 @@ class Video extends Model
      */
     public function getDurationForHumansAttribute(): string
     {
-        return gmdate("H:i:s", $this->duration);
+        return gmdate('H:i:s', $this->duration);
     }
 
     /**

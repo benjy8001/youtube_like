@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Models\Repositories;
@@ -26,7 +27,8 @@ abstract class BaseRepository
         return $this->model->all();
     }
 
-    public function getById($id) {
+    public function getById($id)
+    {
         return $this->model->find($id);
     }
 
@@ -44,13 +46,14 @@ abstract class BaseRepository
             return $this->model->whereIn('id', $ids)->get();
         }
 
-        throw new \InvalidArgumentException("Argument must be an array of indexes to get");
+        throw new \InvalidArgumentException('Argument must be an array of indexes to get');
     }
 
     /**
      * @return Model
      */
-    public function newInstance() {
+    public function newInstance()
+    {
         return $this->model->newInstance();
     }
 
@@ -59,16 +62,17 @@ abstract class BaseRepository
      *
      * @return mixed
      */
-    public function create(object|array $data) {
+    public function create(object|array $data)
+    {
         if (\is_array($data)) {
             return $this->model->create($data);
         }
 
-        if (get_class($data) === get_class($this->model)) {
+        if (\get_class($data) === \get_class($this->model)) {
             return $data->save();
         }
 
-        throw new \InvalidArgumentException("L'argument de create doit être de type array ou de type ".get_class($this->model));
+        throw new \InvalidArgumentException("L'argument de create doit être de type array ou de type ".\get_class($this->model));
     }
 
     /**
@@ -78,7 +82,7 @@ abstract class BaseRepository
      *
      * @return bool
      */
-    public function update(Model|array $data, int $id = 0, string $attribute = "id"): bool
+    public function update(Model|array $data, int $id = 0, string $attribute = 'id'): bool
     {
         if ($data instanceof Model) {
             return $data->save();
@@ -87,7 +91,7 @@ abstract class BaseRepository
             return $this->model->where($attribute, '=', $id)->update($data);
         }
 
-        throw new \InvalidArgumentException("Arguments must be a model or an array with an ID");
+        throw new \InvalidArgumentException('Arguments must be a model or an array with an ID');
     }
 
     /**
@@ -107,5 +111,4 @@ abstract class BaseRepository
     {
         return $this->model->count();
     }
-
 }
