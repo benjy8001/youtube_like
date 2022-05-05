@@ -2,8 +2,7 @@
 
 namespace App\Http\Livewire\Video;
 
-use App\Models\Dislike;
-use App\Models\Like;
+use App\Models\Repositories\DislikeRepository;
 use App\Models\Repositories\LikeRepository;
 use App\Models\Video;
 use Illuminate\View\View;
@@ -44,38 +43,35 @@ class Voting extends Component
     }
 
     /**
-     * @param LikeRepository $likeRepository
+     * @param LikeRepository    $likeRepository
+     * @param DislikeRepository $dislikeRepository
      *
      * @return void
      */
-    public function like(LikeRepository $likeRepository): void
+    public function like(LikeRepository $likeRepository, DislikeRepository $dislikeRepository): void
     {
         if ($this->video->doesUserLikedVideo()) {
             $this->disableLike($likeRepository);
         } else {
-            $likeRepository->createForUserAndVideo(auth()->id(), $this->video->id);
-            $this->disableDislike();
-            $this->likeActive = true;
+            $this->enableLike($likeRepository);
+            $this->disableDislike($dislikeRepository);
         }
         $this->emit('LoadValues');
     }
 
     /**
-     * @param LikeRepository $likeRepository
+     * @param LikeRepository    $likeRepository
+     * @param DislikeRepository $dislikeRepository
      *
      * @return void
      */
-    public function dislike(LikeRepository $likeRepository): void
+    public function dislike(LikeRepository $likeRepository, DislikeRepository $dislikeRepository): void
     {
         if ($this->video->doesUserDislikedVideo()) {
-            Dislike::where('user_id', auth()->id())->where('video_id', $this->video->id)->delete();
-            $this->dislikeActive = false;
+            $this->disableDislike($dislikeRepository);
         } else {
-            $this->video->dislikes()->create([
-                'user_id' => auth()->id(),
-            ]);
+            $this->enableDislike($dislikeRepository);
             $this->disableLike($likeRepository);
-            $this->dislikeActive = true;
         }
         $this->emit('LoadValues');
     }
@@ -90,12 +86,44 @@ class Voting extends Component
         $this->dislikeActive = $this->video->doesUserDislikedVideo();
     }
 
-    private function disableDislike(): void
+    /**
+     * @param DislikeRepository $dislikeRepository
+     *
+     * @return void
+     */
+    private function enableDislike(DislikeRepository $dislikeRepository): void
     {
-        Dislike::where('user_id', auth()->id())->where('video_id', $this->video->id)->delete();
+        $dislikeRepository->createForUserAndVideo(auth()->id(), $this->video->id);
+        $this->dislikeActive = true;
+    }
+
+    /**
+     * @param DislikeRepository $dislikeRepository
+     *
+     * @return void
+     */
+    private function disableDislike(DislikeRepository $dislikeRepository): void
+    {
+        $dislikeRepository->deleteForUserAndVideo(auth()->id(), $this->video->id);
         $this->dislikeActive = false;
     }
 
+    /**
+     * @param LikeRepository $likeRepository
+     *
+     * @return void
+     */
+    private function enableLike(LikeRepository $likeRepository): void
+    {
+        $likeRepository->createForUserAndVideo(auth()->id(), $this->video->id);
+        $this->likeActive = true;
+    }
+
+    /**
+     * @param LikeRepository $likeRepository
+     *
+     * @return void
+     */
     private function disableLike(LikeRepository $likeRepository): void
     {
         $likeRepository->deleteForUserAndVideo(auth()->id(), $this->video->id);
