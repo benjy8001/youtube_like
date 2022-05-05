@@ -43,7 +43,7 @@ final class VideoRepository extends BaseRepository
      */
     public function createDefaultForChannel(int $channelId, string $path): Video
     {
-        return $this->model->create([
+        return parent::create([
             'channel_id' => $channelId,
             'title' => 'untitle',
             'description' => 'none',

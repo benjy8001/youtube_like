@@ -15,4 +15,29 @@ final class LikeRepository extends BaseRepository
     {
         parent::__construct($model);
     }
+
+    /**
+     * @param int $userId
+     * @param int $videoId
+     *
+     * @return Like
+     */
+    public function createForUserAndVideo(int $userId, int $videoId): Like
+    {
+        return parent::create([
+                                  'user_id' => $userId,
+                                  'video_id' => $videoId,
+                              ]);
+    }
+
+    /**
+     * @param int $userId
+     * @param int $videoId
+     *
+     * @return void
+     */
+    public function deleteForUserAndVideo(int $userId, int $videoId): void
+    {
+        $this->model->where('user_id', $userId)->where('video_id', $videoId)->delete();
+    }
 }
