@@ -15,6 +15,8 @@ jobs:
     steps:
     - name: Checkout repo
       uses: actions/checkout@v2
+    - name: Run composer validate
+      run: make composer-validate
     - name: Run linter
       run: make lint
     - name: Run security checker

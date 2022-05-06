@@ -15,5 +15,7 @@ jobs:
     steps:
     - name: Checkout repo
       uses: actions/checkout@v2
-    - name: Run migration checker
-      run: docker network create nginx-proxy && make start && make migrate
+    - name: Run app
+      run: docker network create nginx-proxy && make start
+    - name: Run migration
+      run: make migrate

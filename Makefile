@@ -174,6 +174,10 @@ vendor: composer.lock .env ## Run composer install
 	printf " 💽\033[33m Start Composer ... \033[0m\n"
 	$(COMPOSER) install ${QUIET_PARAM}
 
+composer-validate:
+	printf " 💽\033[33m Start Composer ... \033[0m\n"
+	$(COMPOSER) validate ${QUIET_PARAM}
+
 composer-install:
 	printf " 💽\033[33m Start Composer ... \033[0m\n"
 	$(COMPOSER) install ${QUIET_PARAM}
