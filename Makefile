@@ -183,15 +183,13 @@ assets: ## Compile assets
 	mkdir -p .npm/cache/
 	$(DOCKER) run  --rm -v `pwd`/:/project -w /project node:lts-alpine npm run --cache .npm/cache dev
 
-migration: ## Generate a new doctrine migration
-	printf " 💽\033[33m TODO \033[0m\n"
-	#$(ARTISAN) doctrine:migrations:diff
+migration: ## Generate a new eloquent migration
+	$(ARTISAN) make:migration new_migration_file
 
-migration-sql: ## Generate a new doctrine migration
-	printf " 💽\033[33m TODO \033[0m\n"
-	#$(ARTISAN) doctrine:schema:update --dump-sql
+migrate-sql: ## Play latest eloquent migrations and export to SQL queries
+	$(ARTISAN) migrate --pretend $(QUIET_PARAM)
 
-migrate: ## Play latest doctrine migrations on comutitres and alert database
+migrate: ## Play latest eloquent migrations
 	$(ARTISAN) migrate $(QUIET_PARAM)
 
 db-validate-schema: ## Validate the doctrine ORM mapping
@@ -204,7 +202,7 @@ init-database: ## Delete and create database with user
 	$(EXEC_MYSQL) bash -c "MYSQL_PWD=$(DOCKER_DB_ROOT_PASSWORD) /usr/bin/mysql -u root -e \"GRANT CREATE, DROP ON *.* TO '$(DATABASE_USER)'@'%'; FLUSH PRIVILEGES;\""
 	# on supprime et recrée la base de données pour que tout soit propre
 	$(ARTISAN) migrate:fresh
-	# et on donne à l'utilisateur tous les droits sur la base comutitres
+	# et on donne à l'utilisateur tous les droits sur la base de données
 	$(EXEC_MYSQL) bash -c "MYSQL_PWD=$(DOCKER_DB_ROOT_PASSWORD) /usr/bin/mysql -u root -e \"GRANT ALL PRIVILEGES ON $(DATABASE).* TO '$(DATABASE_USER)'@'%'; FLUSH PRIVILEGES;\""
 
 .PHONY: assets vendor composer.lock
