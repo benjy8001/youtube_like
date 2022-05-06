@@ -6,6 +6,7 @@ namespace App\Models\Repositories;
 
 use App\Models\Comment;
 
+// @todo : Use thix one for get comments too
 final class CommentRepository extends BaseRepository
 {
     /**

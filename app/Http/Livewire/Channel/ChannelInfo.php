@@ -3,7 +3,8 @@
 namespace App\Http\Livewire\Channel;
 
 use App\Models\Channel;
-use App\Models\Subscription;
+use App\Models\Repositories\ChannelRepository;
+use App\Models\Repositories\SubscriptionRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -37,24 +38,23 @@ class ChannelInfo extends Component
     }
 
     /**
+     * @param ChannelRepository $channelRepository
+     *
      * @return Redirector|null
      */
-    public function toggle(): ?Redirector
+    public function toggle(SubscriptionRepository $subscriptionRepository): ?Redirector
     {
         if (!Auth::check()) {
             return redirect()->route('login');
         }
 
         if (auth()->user()->isSubscribedTo($this->channel)) {
-            Subscription::where('user_id', auth()->id())->where('channel_id', $this->channel->id)->delete();
+            $subscriptionRepository->deleteForUserAndChannel(auth()->id(), $this->channel->id);
             $this->userSubscribed = false;
 
             return null;
         }
-        Subscription::create([
-            'user_id' => auth()->id(),
-            'channel_id' => $this->channel->id,
-        ]);
+        $subscriptionRepository->createForUserAndChannel(auth()->id(), $this->channel->id);
         $this->userSubscribed = true;
 
         return null;
