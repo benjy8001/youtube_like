@@ -43,6 +43,14 @@ class RegisterController extends Controller
     }
 
     /**
+     * @return string
+     */
+    public function redirectTo(): string
+    {
+        return app()->getLocale() . $this->redirectTo;
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param array $data

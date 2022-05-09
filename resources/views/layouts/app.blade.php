@@ -42,29 +42,36 @@
                     <ul class="navbar-nav me-auto">
                         @auth
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('video.all', ['channel' => auth()->user()->channel ]) }}">{{ __('All Videos') }}</a>
+                            <a class="nav-link" href="{{ route('video.all', ['locale' => app()->getLocale(), 'channel' => auth()->user()->channel ]) }}">{{ __('All Videos') }}</a>
                         </li>
                         @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+                        @foreach (config('app.available_locales') as $locale)
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   href="{{ route(Route::currentRouteName(), $locale) }}"
+                                   @if ($locale === app()->getLocale()) style="font-weight: bold; text-decoration: underline" @endif>{{ strtoupper($locale) }}</a>
+                            </li>
+                        @endforeach
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login', app()->getLocale()) }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register', app()->getLocale()) }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a class="nav-link" href="{{ route('video.create', ['channel' => Auth::user()->channel]) }}">
+                                <a class="nav-link" href="{{ route('video.create', ['locale' => app()->getLocale(), 'channel' => Auth::user()->channel]) }}">
                                     <span class="material-icons">video_call</span>
                                 </a>
                             </li>
@@ -77,13 +84,13 @@
                                     <a href="{{ route('channel.index', ['channel' => Auth::user()->channel]) }}" class="dropdown-item">
                                         {{ Auth::user()->channel->name }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item" href="{{ route('logout', app()->getLocale()) }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    <form id="logout-form" action="{{ route('logout', app()->getLocale()) }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
                                 </div>
