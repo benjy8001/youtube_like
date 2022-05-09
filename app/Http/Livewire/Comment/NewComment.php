@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Comment;
 
+use App\Models\Repositories\CommentRepository;
 use App\Models\Video;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -27,16 +28,15 @@ class NewComment extends Component
         $this->body = '';
     }
 
-    public function addComment(): void
+    /**
+     * @param CommentRepository $commentRepository
+     *
+     * @return void
+     */
+    public function addComment(CommentRepository $commentRepository): void
     {
-        auth()->user()->comments()->create([
-            'body' => $this->body,
-            'video_id' => $this->video->id,
-            'reply_id' => $this->comId,
-        ]);
-
+        $commentRepository->createCommentForUserAndVideo($this->body, auth()->id(), $this->video->id, $this->comId);
         $this->resetForm();
-
         $this->emit('CommentCreated');
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Comment;
 
+use App\Models\Repositories\CommentRepository;
 use App\Models\Video;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -24,11 +25,13 @@ class AllComments extends Component
     }
 
     /**
+     * @param CommentRepository $commentRepository
+     *
      * @return View
      */
-    public function render(): View
+    public function render(CommentRepository $commentRepository): View
     {
-        return view('livewire.comment.all-comments')
+        return view('livewire.comment.all-comments', ['comments' => $commentRepository->getAllCommentsForVideo($this->video->id)])
             ->extends('layouts.app');
     }
 }

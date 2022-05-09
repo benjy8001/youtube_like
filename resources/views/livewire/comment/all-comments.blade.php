@@ -1,3 +1,3 @@
 <div>
-    @include('includes.recursive', ['comments' => $video->comments()->latestFirst()->get()])
+    @include('includes.recursive', ['comments' => $comments])
 </div>

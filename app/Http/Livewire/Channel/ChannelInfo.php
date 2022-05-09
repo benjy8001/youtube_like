@@ -38,7 +38,8 @@ class ChannelInfo extends Component
     }
 
     /**
-     * @param ChannelRepository $channelRepository
+     * @param ChannelRepository      $channelRepository
+     * @param SubscriptionRepository $subscriptionRepository
      *
      * @return Redirector|null
      */
