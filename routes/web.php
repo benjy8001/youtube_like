@@ -34,7 +34,7 @@ Route::group([
         }
 
         return view('welcome', compact('channels'));
-    });
+    })->name('home');
 
     Auth::routes();
 

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
 
-        <form action="{{ route('search.video') }}" method="POST">
+        <form action="{{ route('search.video', app()->getLocale()) }}" method="POST">
             @csrf
             <div class="d-flex align-items-center my-3">
                 <input type="text" name="query" id="query" class="form-control" placeholder="{{ __('Search') }}">
@@ -19,7 +19,7 @@
             @foreach($channels as $channelVideos)
                 @foreach($channelVideos as $video)
                     <div class="col-12 col-md-6 col-lg-4">
-                        <a href="{{ route('video.watch', $video) }}" class="card-link">
+                        <a href="{{ route('video.watch', ['locale' => app()->getLocale(), 'video' => $video]) }}" class="card-link">
                             <div class="card mb-4" style="width: 333px; border:none;">
                                 @include('includes.videoThumbnail')
                                 <div class="card-body">
