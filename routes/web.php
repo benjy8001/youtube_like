@@ -25,7 +25,7 @@ Route::group([
         'prefix' => '{locale}',
         'where' => ['locale' => '[a-zA-Z]{2}'],
         'middleware' => 'setlocale',
-    ], function() {
+    ], function () {
     Route::get('/', function () {
         if (Auth::check()) {
             $channels = Auth::user()->subscribedChannels()->with('videos')->get()->pluck('videos');

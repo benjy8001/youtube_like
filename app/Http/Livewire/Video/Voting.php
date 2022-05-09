@@ -5,8 +5,10 @@ namespace App\Http\Livewire\Video;
 use App\Models\Repositories\DislikeRepository;
 use App\Models\Repositories\LikeRepository;
 use App\Models\Video;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\Redirector;
 
 class Voting extends Component
 {
@@ -46,10 +48,14 @@ class Voting extends Component
      * @param LikeRepository    $likeRepository
      * @param DislikeRepository $dislikeRepository
      *
-     * @return void
+     * @return Redirector|null
      */
-    public function like(LikeRepository $likeRepository, DislikeRepository $dislikeRepository): void
+    public function like(LikeRepository $likeRepository, DislikeRepository $dislikeRepository): ?Redirector
     {
+        if (!Auth::check()) {
+            return redirect()->route('login', app()->getLocale());
+        }
+
         if ($this->video->doesUserLikedVideo()) {
             $this->disableLike($likeRepository);
         } else {
@@ -63,10 +69,14 @@ class Voting extends Component
      * @param LikeRepository    $likeRepository
      * @param DislikeRepository $dislikeRepository
      *
-     * @return void
+     * @return Redirector|null
      */
-    public function dislike(LikeRepository $likeRepository, DislikeRepository $dislikeRepository): void
+    public function dislike(LikeRepository $likeRepository, DislikeRepository $dislikeRepository): ?Redirector
     {
+        if (!Auth::check()) {
+            return redirect()->route('login', app()->getLocale());
+        }
+
         if ($this->video->doesUserDislikedVideo()) {
             $this->disableDislike($dislikeRepository);
         } else {

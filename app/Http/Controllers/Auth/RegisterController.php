@@ -47,7 +47,7 @@ class RegisterController extends Controller
      */
     public function redirectTo(): string
     {
-        return app()->getLocale() . $this->redirectTo;
+        return app()->getLocale().$this->redirectTo;
     }
 
     /**

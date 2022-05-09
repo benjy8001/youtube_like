@@ -9,7 +9,7 @@
                                 <div class="row">
                                     <div class="col-md-2">
                                         <div style="position: relative;">
-                                            <a href="{{ route('video.watch', ['video' => $video]) }}" alt="{{ $video->title }}">
+                                            <a href="{{ route('video.watch', ['locale' => app()->getLocale(), 'video' => $video]) }}" alt="{{ $video->title }}">
                                                 <img src="{{ secure_asset($video->thumbnail) }}" alt="" class="img-thumbnail">
                                                 <div class="badge bg-dark" style="position: absolute; bottom: 8px; right: 16px;"> {{ $video->durationForHumans }}</div>
                                             </a>
@@ -27,7 +27,7 @@
                                     </div>
                                     @if (auth()->user()->owns($video))
                                         <div class="col-md-2">
-                                            <a href="{{ route('video.edit', ['channel' => auth()->user()->channel, 'video' => $video->uid]) }}" class="btn btn-light btn-sm">{{ __('Edit') }}</a>
+                                            <a href="{{ route('video.edit', ['locale' => app()->getLocale(), 'channel' => auth()->user()->channel, 'video' => $video->uid]) }}" class="btn btn-light btn-sm">{{ __('Edit') }}</a>
                                             <a wire:click.prevent="delete('{{ $video->uid }}')" class="btn btn-danger btn-sm">{{ __('Delete') }}</a>
                                         </div>
                                     @endif

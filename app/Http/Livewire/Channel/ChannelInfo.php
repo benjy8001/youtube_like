@@ -46,7 +46,7 @@ class ChannelInfo extends Component
     public function toggle(SubscriptionRepository $subscriptionRepository): ?Redirector
     {
         if (!Auth::check()) {
-            return redirect()->route('login');
+            return redirect()->route('login', app()->getLocale());
         }
 
         if (auth()->user()->isSubscribedTo($this->channel)) {

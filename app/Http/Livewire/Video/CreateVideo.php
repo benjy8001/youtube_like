@@ -56,6 +56,7 @@ class CreateVideo extends Component
         ConvertVideoForStreaming::dispatch($this->video);
 
         return redirect()->route('video.edit', [
+            'locale' => app()->getLocale(),
             'channel' => $this->channel,
             'video' => $this->video,
         ]);

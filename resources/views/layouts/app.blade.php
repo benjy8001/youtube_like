@@ -52,7 +52,7 @@
                         @foreach (config('app.available_locales') as $locale)
                             <li class="nav-item">
                                 <a class="nav-link"
-                                   href="{{ route(Route::currentRouteName(), $locale) }}"
+                                   href="{{ route('home', $locale) }}"
                                    @if ($locale === app()->getLocale()) style="font-weight: bold; text-decoration: underline" @endif>{{ strtoupper($locale) }}</a>
                             </li>
                         @endforeach
@@ -81,7 +81,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a href="{{ route('channel.index', ['channel' => Auth::user()->channel]) }}" class="dropdown-item">
+                                    <a href="{{ route('channel.index', ['locale' => app()->getLocale(), 'channel' => Auth::user()->channel]) }}" class="dropdown-item">
                                         {{ Auth::user()->channel->name }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout', app()->getLocale()) }}"
