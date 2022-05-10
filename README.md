@@ -12,6 +12,21 @@
 - Ability to search and like or dislike video, subscribe to a video channel
 - Video commentary and reply
 ---
+
+<br />
+<p align="center">
+  <table>
+    <tr>
+      <td><img width="400" src="https://github.com/benjy8001/youtube_like/blob/master/public_git/watch.png" /></td>
+      <td><img width="400" src="https://github.com/benjy8001/youtube_like/blob/master/public_git/home.png" /></td>
+    </tr>
+    <tr>
+      <td><img width="400" src="https://github.com/benjy8001/youtube_like/blob/master/public_git/channel.png" /></td>
+      <td>&nbsp;</td>
+    </tr>
+  </table>
+</p>
+
 <details>
     <summary>📃 Commands history</summary>
 
