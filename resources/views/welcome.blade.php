@@ -13,7 +13,7 @@
 
         <div class="row my-3">
             @if(empty($channels->count()))
-                <p>{{ __('$You are not subscribed to any channel !') }}</p>
+                <p>{{ __('You are not subscribed to any channel !') }}</p>
             @endif
 
             @foreach($channels as $channelVideos)
@@ -33,7 +33,7 @@
                                     <p class="text-gray mt-4 font-weight-bold" style="line-height: 0.2px">
                                         {{ $video->channel->name}}
                                     </p>
-                                    <p class="text-gray font-weight-bold" style="line-height: 0.2px">{{ $video->views }} {{ __('views') }} •
+                                    <p class="text-gray font-weight-bold" style="line-height: 0.2px">{{ trans_choice('[0,1]:nb view|:nb views', $video->views, ['nb' => $video->views]) }} •
                                         {{ $video->created_at->diffForHumans() }}</p>
                                 </div>
                             </div>

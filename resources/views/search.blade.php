@@ -14,7 +14,7 @@
                                     </div>
                                     <div class="card-body">
                                         <h4>{{ $video->title }}</h4>
-                                        <p class="text-gray font-weight-bold">{{ $video->views }} {{ __('views') }} •
+                                        <p class="text-gray font-weight-bold">{{ trans_choice('[0,1]:nb view|:nb views', $video->views, ['nb' => $video->views]) }} •
                                             {{ $video->created_at->diffForHumans() }}</p>
                                         <div class="d-flex align-items-center">
                                             <img src="{{ secure_asset($video->channel->picture) }}" class="rounded circle">

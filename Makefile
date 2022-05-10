@@ -45,7 +45,22 @@ coffee:
 	printf "\033[32m You can go take a coffee while we work for you \033[0m\n"
 
 banner:
-	printf "\033[95m WEB CV\n"
+	printf "\033[95m								\n"
+	printf "\033[95m██╗   ██╗ ██████╗ ██╗   ██╗████████╗██╗   ██╗██████╗ ███████╗\n"
+	printf "\033[95m╚██╗ ██╔╝██╔═══██╗██║   ██║╚══██╔══╝██║   ██║██╔══██╗██╔════╝\n"
+	printf "\033[95m ╚████╔╝ ██║   ██║██║   ██║   ██║   ██║   ██║██████╔╝█████╗  \n"
+	printf "\033[95m  ╚██╔╝  ██║   ██║██║   ██║   ██║   ██║   ██║██╔══██╗██╔══╝  \n"
+	printf "\033[95m   ██║   ╚██████╔╝╚██████╔╝   ██║   ╚██████╔╝██████╔╝███████╗\n"
+	printf "\033[95m   ╚═╝    ╚═════╝  ╚═════╝    ╚═╝    ╚═════╝ ╚═════╝ ╚══════╝\n"
+	printf "\033[95m                                                             \n"
+	printf "\033[95m██╗     ██╗██╗  ██╗███████╗                                  \n"
+	printf "\033[95m██║     ██║██║ ██╔╝██╔════╝                                  \n"
+	printf "\033[95m██║     ██║█████╔╝ █████╗                                    \n"
+	printf "\033[95m██║     ██║██╔═██╗ ██╔══╝                                    \n"
+	printf "\033[95m███████╗██║██║  ██╗███████╗                                  \n"
+	printf "\033[95m╚══════╝╚═╝╚═╝  ╚═╝╚══════╝    \n"
+	printf "\033[95m								\n"
+
 #
 .DEFAULT_GOAL := help
 help: banner ## this help
@@ -78,6 +93,11 @@ down: ## Stop the VMs
 	printf " \033[31m◉\033[0m\033[33m  Stopping application ... \033[0m\n"
 	$(DOCKER_COMPOSE) down --volumes
 	printf "\n\n"
+
+connect: banner ## Connect to apache docker
+	printf " 👷\033[33m  Application shell ... \033[0m\n"
+	$(DOCKER_COMPOSE) exec apache bash
+	printf "\033[33mBye \033[0m\n\n"
 
 add-hooks:
 	 rm -fr .git/hooks && ln -s `pwd`/.hooks/ .git/hooks
@@ -133,7 +153,7 @@ remove-hosts:login-sudo
 	cp .env.example .env
 	#$(ARTISAN) key:generate
 
-start: add-hooks add-hosts .env run vendor assets init-database ## Run project
+start: add-hooks add-hosts .env run vendor assets init-storage init-database ## Run project
 
 .PHONY: start-nginx-proxy add-certificates nginx-setup
 
@@ -186,6 +206,9 @@ assets: ## Compile assets
 	$(DOCKER) run  --rm -v `pwd`/:/project -w /project node:lts-alpine npm install
 	mkdir -p .npm/cache/
 	$(DOCKER) run  --rm -v `pwd`/:/project -w /project node:lts-alpine npm run --cache .npm/cache dev
+
+init-storage: ## Symlink storage dir
+	$(DOCKER_COMPOSE) exec apache php artisan storage:link
 
 migration: ## Generate a new eloquent migration
 	$(ARTISAN) make:migration new_migration_file

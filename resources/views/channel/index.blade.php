@@ -20,7 +20,7 @@
         </div>
         <div>
             @can('update', $channel)
-            <a href="{{ route('channel.edit', $channel) }}" class="btn btn-primary">{{ __('Edit Channel') }}</a>
+            <a href="{{ route('channel.edit', ['locale' => app()->getLocale(), 'channel' => $channel]) }}" class="btn btn-primary">{{ __('Edit Channel') }}</a>
             @endcan
         </div>
     </div>
@@ -29,7 +29,7 @@
         <div class="row my-4">
             @foreach ($channel->videos as $video)
             <div class="col-12 col-md-6 col-lg-4">
-                <a href="{{ route('video.watch', $video) }}" class="card-link">
+                <a href="{{ route('video.watch', ['locale' => app()->getLocale(), 'video' => $video]) }}" class="card-link">
                     <div class="card mb-4" style="width: 333px; border:none;">
                         @include('includes.videoThumbnail')
                         <div class="card-body">
@@ -43,7 +43,7 @@
                             <p class="text-gray mt-4 font-weight-bold" style="line-height: 0.2px">
                                 {{ $video->channel->name}}
                             </p>
-                            <p class="text-gray font-weight-bold" style="line-height: 0.2px">{{ $video->views }} {{ __('views') }} •
+                            <p class="text-gray font-weight-bold" style="line-height: 0.2px">{{ trans_choice('[0,1]:nb view|:nb views', $video->views, ['nb' => $video->views]) }} •
                                 {{ $video->created_at->diffForHumans() }}</p>
                         </div>
                     </div>

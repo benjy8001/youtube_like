@@ -63,6 +63,8 @@ class Voting extends Component
             $this->disableDislike($dislikeRepository);
         }
         $this->emit('LoadValues');
+
+        return null;
     }
 
     /**
@@ -84,6 +86,8 @@ class Voting extends Component
             $this->disableLike($likeRepository);
         }
         $this->emit('LoadValues');
+
+        return null;
     }
 
     private function checkIfLike(): void

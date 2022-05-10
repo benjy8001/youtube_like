@@ -56,7 +56,7 @@ class EditChannel extends Component
 
         session()->flash('message', __('Channel updated !'));
 
-        return redirect()->route('channel.edit', ['channel' => $this->channel->slug]);
+        return redirect()->route('channel.edit', ['locale' => app()->getLocale(), 'channel' => $this->channel->slug]);
     }
 
     /**
