@@ -29,7 +29,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <h3 class="mt-3">{{ $video->title }}</h3>
-                                <p class="gray-text">{{ $video->views }} views. {{ $video->uploaded_date }}</p>
+                                <p class="gray-text">{{ trans_choice('[0,1]:nb view|:nb views', $video->views, ['nb' => $video->views]) }}. {{ $video->uploaded_date }}</p>
                             </div>
                             <div>
                                 <livewire:video.voting :video="$video" />
@@ -45,7 +45,7 @@
                 </div>
                 <hr>
 
-                <h4>{{ $video->allCommentsCount() }} {{ __('comments') }}</h4>
+                <h4>{{ trans_choice('[0,1]:nb comment|:nb comments', $video->allCommentsCount(), ['nb' => $video->allCommentsCount()]) }}</h4>
                 @auth
                     <div class="my-2">
                         <livewire:comment.new-comment :video="$video" :comId="0" :key="$video->id" />

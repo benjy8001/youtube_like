@@ -15,7 +15,7 @@
             <img src="{{ secure_asset($channel->picture)}}" class="rounded-circle me-3" height="130px;">
             <div>
                 <h3>{{ $channel->name }}</h3>
-                <p>{{ $channel->subscribers() }} {{ __('Subscribers') }}</p>
+                <p>{{ trans_choice('[0,1]:nb subscriber|:nb subscribers', $channel->subscribers(), ['nb' => $channel->subscribers()]) }}</p>
             </div>
         </div>
         <div>

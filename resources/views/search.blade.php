@@ -6,7 +6,7 @@
             @if($videos->count())
                 @foreach($videos as $video)
                     <div class="col-12">
-                        <a href="{{ route('video.watch', $video) }}" class="card-link">
+                        <a href="{{ route('video.watch', ['locale' => app()->getLocale(), 'video' => $video]) }}" class="card-link">
                             <div class="card mb-4" style="border:none;">
                                 <div class="card-horizontal">
                                     <div style="width: 333px;">
